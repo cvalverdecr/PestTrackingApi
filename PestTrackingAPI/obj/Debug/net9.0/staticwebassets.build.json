@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "icQrWlGyPANpBbJMGOw5bi5IvP3tHTLAZRV/XZ4DgAE=",
+  "Source": "PestTrackingAPI",
+  "BasePath": "_content/PestTrackingAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
