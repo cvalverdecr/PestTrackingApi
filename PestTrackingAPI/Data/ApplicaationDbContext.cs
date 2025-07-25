@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-public class ApplicationDbContext : IdentityDbContext<Usuario, Rol, int>
+public class ApplicationDbContext : IdentityDbContext<Usuario,Rol, string>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options) { }
@@ -22,43 +22,56 @@ public class ApplicationDbContext : IdentityDbContext<Usuario, Rol, int>
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Empresa>()
-            .HasOne(e => e.Pais)
-            .WithMany(p => p.Empresas)
+            .HasOne<Pais>()
+            .WithMany()
             .HasForeignKey(e => e.IdPais);
 
+        modelBuilder.Entity<Canton>()
+            
+            .HasOne<Provincia>()
+            .WithMany()
+            .HasForeignKey(c => c.IdProvincia);
+
+        modelBuilder.Entity<Distrito>()
+            .HasOne<Canton>()
+            .WithMany()
+            .HasForeignKey(d => d.IdCanton);
+
+        modelBuilder.Entity<CaracteristicaTipoCultivo>()
+            .HasOne<TipoCultivo>()
+            .WithMany()
+            .HasForeignKey(ctc => ctc.IdTipoCultivo);
+
+        modelBuilder.Entity<CaracteristicaTipoCultivo>()
+            .HasOne<Caracteristica>()
+            .WithMany()
+            .HasForeignKey(ctc => ctc.IdCaracteristica);
+
         modelBuilder.Entity<Cultivo>()
-            .HasOne(c => c.Empresa)
+            .HasOne<Empresa>()
             .WithMany()
             .HasForeignKey(c => c.IdEmpresa);
 
         modelBuilder.Entity<Cultivo>()
-            .HasOne(c => c.TipoCultivo)
-            .WithMany(t => t.Cultivos)
+            .HasOne<TipoCultivo>()
+            .WithMany()
             .HasForeignKey(c => c.IdTipoCultivo);
 
-        modelBuilder.Entity<Canton>()
-            .HasOne(c => c.Provincia)
-            .WithMany(p => p.Cantones)
-            .HasForeignKey(c => c.IdProvincia);
-
-        modelBuilder.Entity<Distrito>()
-            .HasOne(d => d.Canton)
-            .WithMany(c => c.Distritos)
-            .HasForeignKey(d => d.IdCanton);
-
-        modelBuilder.Entity<CaracteristicaTipoCultivo>()
-            .HasOne(ct => ct.TipoCultivo)
-            .WithMany()
-            .HasForeignKey(ct => ct.IdTipoCultivo);
-
-        modelBuilder.Entity<CaracteristicaTipoCultivo>()
-            .HasOne(ct => ct.Caracteristica)
-            .WithMany()
-            .HasForeignKey(ct => ct.IdCaracteristica);
-
         modelBuilder.Entity<Muestra>()
-            .HasOne(m => m.Cultivo)
+            .HasOne<Cultivo>()
             .WithMany()
             .HasForeignKey(m => m.IdCultivo);
+
+        modelBuilder.Entity<Muestra>()
+            .HasOne<Usuario>()
+            .WithMany()
+            .HasForeignKey(m => m.IdUsuario)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Muestra>()
+            .HasOne<Usuario>()
+            .WithMany()
+            .HasForeignKey(m => m.IdUsuarioModificacion)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

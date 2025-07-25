@@ -66,3 +66,4 @@
 /Users/cvalverdecr/Documents/Developer/Net Core/PestsTrackingProject/API/PestTrackingAPI/obj/Debug/net9.0/PestTrackingAPI.pdb
 /Users/cvalverdecr/Documents/Developer/Net Core/PestsTrackingProject/API/PestTrackingAPI/obj/Debug/net9.0/PestTrackingAPI.genruntimeconfig.cache
 /Users/cvalverdecr/Documents/Developer/Net Core/PestsTrackingProject/API/PestTrackingAPI/obj/Debug/net9.0/ref/PestTrackingAPI.dll
+/Users/cvalverdecr/Documents/Developer/Net Core/PestsTrackingProject/API/PestTrackingAPI/obj/Debug/net9.0/PestTrackingAPI.sourcelink.json

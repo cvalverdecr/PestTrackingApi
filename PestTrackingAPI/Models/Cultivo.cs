@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+
 public class Cultivo
 {
+    [Key]
     public int IdCultivo { get; set; }
     public string Descripcion { get; set; }
     public int Orden { get; set; }

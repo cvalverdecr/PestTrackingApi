@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-public class Usuario :IdentityUser<int>
+public class Usuario :IdentityUser<string>
 {
-    public int IdUsuario { get; set; }
+    [Key]
+    public string IdUsuario { get; set; }
     public string Nombre { get; set; }
     public string Apellido1 { get; set; }
     public string Apellido2 { get; set; }

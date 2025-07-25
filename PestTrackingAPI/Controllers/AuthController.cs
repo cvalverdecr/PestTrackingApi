@@ -31,6 +31,7 @@ public class AuthController : ControllerBase
             Nombre = model.Nombre,
             Apellido1 = model.Apellido1,
             Apellido2 = model.Apellido2,
+            Id = "1",
             Estado = true
         };
 
@@ -45,7 +46,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto model)
     {
-        var user = await _userManager.FindByEmailAsync(model.Correo);
+        var user = await _userManager.FindByEmailAsync(model.Email);
         if (user == null || !user.Estado)
             return Unauthorized("Credenciales inválidas.");
 
@@ -66,7 +67,7 @@ public class AuthController : ControllerBase
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-            new Claim("id", user.IdUsuario.ToString()),
+            new Claim("id", user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
